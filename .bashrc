@@ -82,7 +82,25 @@ extract ()
   fi
 }
 
+############# navigation
+up () {
+  local d=""
+  local limit="$1"
 
+  # Default to limit of 1
+  if [ -z "$limit" ] || [ "$limit" -le 0 ]; then
+    limit=1
+  fi
+
+  for ((i=1;i<=limit;i++)); do
+    d="../$d"
+  done
+
+  # perform cd. Show error if cd fails
+  if ! cd "$d"; then
+    echo "Couldn't go up $limit dirs.";
+  fi
+}
 
 ########################################################################
 ###############                 ALIASES                  ###############
@@ -215,6 +233,7 @@ alias nfstab="sudo $EDITOR /etc/fstab"
 alias nbash="$VISUAL ~/.bashrc"
 alias nzsh="$VISUAL ~/.zshrc"
 alias nfish="$VISUAL ~/.config/fish/config.fish"
+alias ndnf="EDITOR /etc/dnf/dnf.conf"
 alias nbspwm="$VISUAL ~/.config/bspwm/bspwmrc"
 alias nsxhkd="$VISUAL ~/.config/sxhkd/sxhkdrc"
 alias nsourcelist="sudo $EDITOR /etc/apt/sources.list"
