@@ -15,11 +15,13 @@ set LANG "en_IN.utf8"
 set -x LC_ALL en_IN.UTF-8
 set -x LC_CTYPE en_IN.UTF-8
 
+### Set timedatectl synchronization on
+alias set-time ='timedatectl set-ntp true'
+
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
-set EDITOR "nvim"                                 # $EDITOR use Neovim in terminal
-set VISUAL "nvim"                                 # $VISUAL use your editor of choice in GUI mode
+set EDITOR "nvim" 
 
 ### PATH
 
@@ -35,14 +37,17 @@ set fish_color_param '#d0d0d0'
 ###############                 FUNCTION                 ###############
 ########################################################################
 
+##### make directory and CD into folder #########
 function mkdir-cd
     mkdir -p -- $argv && cd -- $argv
 end
 
+######## MOVE#######
 function move
     mv -i $argv
 end
 
+######## backup file
 function backup --argument filename
     cp $filename $filename.bak
 end
@@ -125,6 +130,8 @@ alias clr='clear;colorscript random'
 # fastboot sudo permition
 alias fastboot='sudo fastboot'
 
+#dd command
+alias dd='sudo dd bs=4M status=progress'
 # navigation
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -144,24 +151,24 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-#dnf command
+#pacman command
 alias pacins='sudo dnf install'
-alias pacrmv='sudo dnf remove'
-alias pacrmv-d='sudo dnf autoremove'          # remove orphaned packages
-alias cleanup='sudo dnf clean all'            
-alias pacup='sudo dnf update'
-alias pacsearch='dnf search'
+alias pacrmv='sudo dnf remove --noautoremove'
+alias pacrmvwd='sudo dnf remove'
+alias pacup='sudo dnf update systemd'
+alias search='dnf search'
+alias cleanup='sudo dnf autoremove'
+alias dnflist='dnf grouplist'
+alias groupins='sudo dnf groupinstall'
+alias grouprmv='sudo dnf groupremove'
+
 
 #Source config
 alias fsource='source ~/.config/fish/config.fish'
 alias bsource='source ~/.bashrc'
 
-#wifi & bluetooth
+#wifi
 alias wifi="nmtui"
-alias blue="blueberry"
-
-#font listing
-alias flist='fc-list | grep'
 
 #chmod
 alias mod="sudo chmod +x"
@@ -183,13 +190,6 @@ alias pull='git pull origin'
 alias push='git push origin'
 alias tag='git tag'
 alias newtag='git tag -a'
-alias gemail='git config --global user.email'
-alias gname='git config --global user.name'
-
-# script to arch system maintaincence
-#To download this https://github.com/voider755/almh.git
-# arch user "yay -S almh-git"
-alias maintaincence='almh.py'
 
 #list all drive with UUID
 alias list_drive='lsblk -f'
@@ -201,60 +201,35 @@ alias wget="wget -c"
 alias userlist="cut -d: -f1 /etc/passwd"
 
 #grub update
-alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-
-
-#get fastest mirrors in your neighborhood
-# Download reflector "sudo pacman -S reflector"
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose  --sort rate --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 30 --number 10 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 30 --number 10 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 30 --number 10 --sort age --save /etc/pacman.d/mirrorlist"
-
-#Recent Installed Packages
-# Download expac "sudo pacman -S expac"
-alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -20 | nl"
-alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
+alias grub-update="sudo grub2-mkconfig -o /boot/grub2/grub.cfg"
 
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
 #Edit with your EDITOR for important configuration files
 alias nlightdm="sudo $EDITOR /etc/lightdm/lightdm.conf"
-alias npacman="sudo $EDITOR /etc/pacman.conf"
-alias nparu="sudo $EDITOR /etc/paru.conf"
 alias ngrub="sudo $EDITOR /etc/default/grub"
-alias nconfgrub="sudo $EDITOR /boot/grub/grub.cfg"
-alias nmkinitcpio="sudo $EDITOR /etc/mkinitcpio.conf"
-alias nmirrorlist="sudo $EDITOR /etc/pacman.d/mirrorlist"
-alias narcomirrorlist='sudo $EDITOR /etc/pacman.d/arcolinux-mirrorlist'
 alias nsddm="sudo $EDITOR /usr/lib/sddm/sddm.conf.d/default.conf"
 alias nfstab="sudo $EDITOR /etc/fstab"
-alias nbash="$VISUAL ~/.bashrc"
-alias nzsh="$VISUAL ~/.zshrc"
-alias nfish="$VISUAL ~/.config/fish/config.fish"
-alias ndnf="EDITOR /etc/dnf/dnf.conf"
-alias nbspwm="$VISUAL ~/.config/bspwm/bspwmrc"
-alias nsxhkd="$VISUAL ~/.config/sxhkd/sxhkdrc"
-alias nsourcelist="sudo $EDITOR /etc/apt/sources.list"
+alias nbash="$EDITOR ~/.bashrc"
+alias nzsh="$EDITOR ~/.zshrc"
+alias nfish="$EDITOR ~/.config/fish/config.fish"
+alias nbspwm="$EDITOR ~/.config/bspwm/bspwmrc"
+alias nsxhkd="$EDITOR ~/.config/sxhkd/sxhkdrc"
 alias ndnf="sudo $EDITOR /etc/dnf/dnf.conf"
 
 #Edit config file for ricing
-alias ni3="$VISUAL ~/.config/i3/config"
-alias npolybar="$VISUAL ~/.config/polybar/config"
-alias nkitty="$VISUAL ~/.config/kitty/kitty.conf"
-alias nalacritty="$VISUAL ~/.config/alacritty/alacritty.yml"
-alias npicom="$VISUAL ~/.config/picom/picom.conf"
-alias nxresources="$VISUAL ~/.Xresources"
-alias nstarship="$VISUAL ~/.config/starship.toml"
-alias nneofetch="$VISUAL ~/.config/neofetch/config.conf"
-#systeminfo
-alias probe="sudo -E hw-probe -all -upload"
-alias sysfailed="systemctl list-units --failed"
+alias ni3="$EDITOR ~/.config/i3/config"
+alias npolybar="$EDITOR ~/.config/polybar/config"
+alias nkitty="$EDITOR ~/.config/kitty/kitty.conf"
+alias nalacritty="$EDITOR ~/.config/alacritty/alacritty.yml"
+alias npicom="$EDITOR ~/.config/picom/picom.conf"
+alias nxresources="$EDITOR ~/.Xresources"
+alias nstarship="$EDITOR ~/.config/starship.toml"
+alias nneofetch="$EDITOR ~/.config/neofetch/config.conf"
 
 #shutdown or reboot
-alias shutdown="sudo shutdown now"
-alias reboot="sudo reboot"
+alias shutdown="shutdown now"
 
 #give the list of all installed desktops - xsessions desktops
 alias xd="ls /usr/share/xsessions"
@@ -268,32 +243,12 @@ alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 # the terminal rickroll
 alias rr='curl -s -L http://bit.ly/10hA8iC | bash'
 
-# youtube-dl
-alias yta-aac="youtube-dl --extract-audio --audio-format aac "
-alias yta-best="youtube-dl --extract-audio --audio-format best "
-alias yta-flac="youtube-dl --extract-audio --audio-format flac "
-alias yta-m4a="youtube-dl --extract-audio --audio-format m4a "
-alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
-alias yta-opus="youtube-dl --extract-audio --audio-format opus "
-alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
-alias yta-wav="youtube-dl --extract-audio --audio-format wav "
-alias ytv-best="youtube-dl -f bestvideo+bestaudio "
-
-
 ########################################################################
 ###############                   Styling                ###############
 ########################################################################
 
-### RANDOM COLOR SCRIPT ###
-# Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
-# Or install it from the Arch User Repository: shell-color-scripts
-#colorscript random
+##starship config
+starship init fish | source
 
-#Custimize scripts
-  # neofetch
-  # figlet -c -f doom 'Lakshmikanta'
-  # fm6000 -random -color random
 
 end
-
-starship init fish | source

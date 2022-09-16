@@ -1,5 +1,5 @@
 configuration {
-    font:                           "Sourcecode Pro Regular 10";
+    font:                           "Sourcecode Pro Regular 12";
     show-icons:                     false;
     icon-theme: 		    "Arc-X-D";
     scroll-method:                  0;
@@ -11,7 +11,7 @@ configuration {
     selected-normal-foreground:  #212128;
     foreground:                  #eeeef4;
     normal-foreground:           @foreground;
-    alternate-normal-background: rgba ( 45, 48, 59, 100 % );
+    alternate-normal-background: rgba ( 45, 48, 59, 70 % );
     red:                         rgba ( 220, 50, 47, 100 % );
     selected-urgent-foreground:  rgba ( 249, 249, 249, 100 % );
     blue:                        rgba ( 38, 139, 210, 100 % );
@@ -25,17 +25,17 @@ configuration {
     alternate-normal-foreground: @foreground;
     normal-background:           rgba ( 45, 48, 59, 1 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
-    selected-normal-background:  #f24054;
+    selected-normal-background:  #f24064;
     border-color:                rgba ( 124, 131, 137, 100 % );
     spacing:                     2;
     separatorcolor:              rgba ( 45, 48, 59, 1 % );
     urgent-background:           rgba ( 45, 48, 59, 15 % );
-    selected-urgent-background:  rgba ( 165, 66, 66, 100 % );
+    selected-urgent-background:  rgba ( 165, 66, 66, 70 % );
     alternate-urgent-foreground: @urgent-foreground;
     background-color:            rgba ( 0, 0, 0, 0 % );
     alternate-active-foreground: @active-foreground;
     active-background:           rgba ( 29, 31, 33, 17 % );
-    selected-active-background:  rgba ( 26, 28, 35, 100 % );
+    selected-active-background:  rgba ( 26, 28, 35, 70 % );
 }
 
 window {
@@ -43,9 +43,9 @@ window {
     border:                         0;
     padding:                        10;
     transparency:                   "real";
-    width:                          120px;
+    width:                          144px;
     location:                       Northeast;
-    y-offset:                       24;
+    y-offset:                       28;
 /*x-offset:	                    850;*/
     transparency:                   "real";
 }

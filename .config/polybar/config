@@ -86,6 +86,7 @@ green= #40f260
 yellow = #f2f260
 blue = #a480f2
 cyan = #00bcd4
+tela = #30f0b2
 orange = #f28080
 pink = #f240f2
 purple = #8060f2
@@ -123,8 +124,10 @@ module-margin-right = 0
 ;################ Fonts ########################
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
-font-0 = DejaVuSansMono Nerd Font:style=Regular:pixelsize=12;1
-font-1 = FontAwesome:pixelsize=12;2
+font-0 = D-DIN Condensed:style=Medium:pixelsize=12;1
+;sudo dnf -y install d-din-condensed-fonts
+
+font-1 = Hack Nerd Font:style=Bold:pixelsize=14;2
 
 ;===============================================================================
 ; modules: [ arch-aur-updates, battery , bluetooth, brightnessctl* ,bullet, cpu,  date ,i3, kdeconnect, keyboard
@@ -132,7 +135,7 @@ font-1 = FontAwesome:pixelsize=12;2
 
 modules-left = bullet i3 xwindow
 modules-center =
-modules-right = network wifi bluetooth pulseaudio battery brightnessctl uptime date powermenu
+modules-right = network wifi bluetooth pulseaudio battery brightnessctl date powermenu
 ;===============================================================================
 separator =
 
@@ -140,7 +143,7 @@ separator =
 
 tray-position = none
 tray-padding = 2
-tray-background = ${colors.background-trans}
+tray-background = ${color.background} 
 tray-foreground = ${colors.foreground}
 
 ;i3: Make the bar appear below windows
@@ -188,43 +191,40 @@ fuzzy-match = false
 ws-icon-0 = 1;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;
-ws-icon-5 = 6;
+ws-icon-3 = 4;
+ws-icon-4 = 5;粒
+ws-icon-5 = 6;嗢
 ws-icon-6 = 7;
 ws-icon-7 = 8;
-ws-icon-8 = 9;
-ws-icon-default = 
+ws-icon-8 = 9;ﱘ
+ws-icon-default = i
+ws-icon-font = 2
 
 format = <label-state> <label-mode>
 
 label-mode = %{T2}%mode%%{T-}
 label-mode-padding = 1
-label-mode-background = ${colors.background-alt}
+label-mode-background = ${colors.background-trans}
 
 label-focused = %{T2}%icon%%{T-}
-label-focused-foreground = ${colors.background}
+label-focused-foreground = ${colors.background-trans}
 label-focused-background = ${colors.cyan}
-label-focused-padding = 1
-label-focused-font = 2
+label-focused-padding = 2
 
 label-unfocused = %{T2}%icon%%{T-}
 label-unfocused-foreground = ${colors.foreground}
-label-unfocused-background = ${colors.background-alt}
-label-unfocused-padding = 1
-label-unfocused-font = 2
+label-unfocused-background = ${colors.background-trans}
+label-unfocused-padding = 2
 
 label-visible = %{T2}%icon%%{T-}
 label-visible-foreground = ${colors.foreground}
-label-visible-background = ${colors.background-alt}
-label-visible-padding = 1
-label-visible-font = 2
+label-visible-background = ${colors.background-trans}
+label-visible-padding = 2
 
 label-urgent = %{T2}%icon%%{T-}
-label-urgent-foreground = ${colors.background}
+label-urgent-foreground = ${colors.background-trans}
 label-urgent-background = ${colors.red}
-label-urgent-padding = 1
-label-urgent-font = 2
+label-urgent-padding = 2
 
 ; Separator in between workspaces
 ;label-separator = |
@@ -246,7 +246,7 @@ icon-1 = 2;
 icon-2 = 3;
 icon-3 = 4;
 icon-4 = 5;
-icon-5 = 6;
+icon-5 = 6;嗢
 icon-6 = 7;
 icon-7 = 8;
 icon-8 = 9;
@@ -259,20 +259,17 @@ label-active = %icon%
 label-active-foreground = ${colors.background}
 label-active-background = ${colors.cyan}
 label-active-padding = 1
-label-active-font = 2
 
 label-occupied = %icon%
 label-occupied-background = ${colors.background}
 label-occupied-foreground = ${colors.foreground}
 label-occupied-padding = 1
-label-occupied-font = 2
 
 label-urgent = %icon%
 label-urgent-foreground = ${colors.background}
 label-urgent-background = ${colors.red}
 label-urgent-underline = ${colors.alert}
 label-urgent-padding = 1
-label-urgent-font = 2
 
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
@@ -310,7 +307,9 @@ content-background = ${colors.background-trans}
 
 [module/bullet]
 type= custom/text
-content= ""
+content= ""
+content-font = 2
+click-left= exec rofi -modi drun -show drun -config ~/.config/rofi/panel.rasi
 content-background= ${colors.red}
 content-foreground = ${colors.background}
 content-padding = 1
@@ -397,21 +396,23 @@ label-discharging = %percentage%%
 label-full =  100%
 
 ; Only applies if <ramp-capacity> is used
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-font = 2
 
 ; Only applies if <bar-capacity> is used
 bar-capacity-width = 10
 
 ; Only applies if <animation-charging> is used
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-font = 2
 ; Framerate in milliseconds
 animation-charging-framerate = 750
 
@@ -422,6 +423,7 @@ animation-discharging-1 = 
 animation-discharging-2 = 
 animation-discharging-3 = 
 animation-discharging-4 = 
+animation-discharging-font = 2
 ; Framerate in milliseconds
 ;=================================================================================
 
@@ -429,8 +431,8 @@ animation-discharging-4 = 
 type = custom/script
 exec = ~/.config/polybar/scripts/bluetooth.sh
 interval = 2
-click-left = exec blueberry
-click-right = exec ~/.config/polybar/scripts/toggle_bluetooth.sh
+click-right = exec blueberry
+click-left = exec ~/.config/polybar/scripts/toggle_bluetooth.sh
 format-padding = 1
 format-background = ${colors.blue}
 format-foreground = ${colors.background}
@@ -467,6 +469,7 @@ format-prefix = ""
 format-prefix-background = ${colors.pink}
 format-prefix-foreground = ${colors.background}
 format-prefix-padding = 1
+format-prefix-font = 2
 
 label = %time%
 label-background = ${colors.background-alt}
@@ -480,13 +483,14 @@ type = internal/cpu
 interval = 1
 
 format-prefix = ""
-format-prefix-background = ${colors.cyan}
+format-prefix-background = ${colors.orange}
 format-prefix-foreground = ${colors.background}
-format-prefix-padding = 1
+format-prefix-padding-left = 1
+format-prefix-font = 2
 
 label = %{T1}%percentage:2%%%{T-}
-label-background = ${colors.background-alt}
-label-foreground = ${colors.foreground}
+label-background = ${colors.orange}
+label-foreground = ${colors.background}
 label-padding = 1
 label-underline = ${colors.cyan}
 ;===============================================================================
@@ -508,6 +512,7 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = ""
+format-prefix-font = 2
 format-prefix-foreground = ${colors.background}
 format-prefix-background = ${colors.cyan}
 format-prefix-padding = 1
@@ -567,7 +572,7 @@ label-connected-background = ${colors.pink}
 label-connected-foreground = ${colors.background}
 label-connected-padding = 1
 
-label-disconnected = "  disconnected"
+label-disconnected = ""
 label-disconnected-background = ${colors.pink}
 label-disconnected-foreground = #666
 label-disconnected-padding = 1
@@ -587,7 +592,8 @@ tail = true
 exec = echo "⏻"
 label-background = ${colors.red}
 label-foreground = ${colors.background}
-label-padding = 1
+label-padding = 3
+label-font = 2
 click-left = exec ~/.config/polybar/scripts/powermenu
 ;===============================================================================
 
@@ -604,6 +610,7 @@ label-muted = 婢 muted
 label-muted-background = ${colors.yellow}
 label-muted-foreground = #666
 label-muted-padding = 1
+label-muted-font = 2
 
 ; Only applies if <ramp-volume> is used
 ramp-volume-0 = 奄
@@ -614,6 +621,7 @@ ramp-volume-4 = 
 ramp-volume-background = ${colors.yellow}
 ramp-volume-foreground = ${colors.background}
 ramp-volume-padding = 1
+ramp-volume-font = 2
 
 ;Right and Middle click
 click-right = pavucontrol
@@ -664,14 +672,14 @@ format-disconnected = <label-disconnected>
 ;   %downspeed% [wireless+wired]
 ;   %linkspeed% [wired]
 
-label-connected = "%{A1:nm-connection-editor:} %essid%%{A}"
-label-connected-background = ${colors.orange}
+label-connected = "%{A1:nm-connection-editor:}直 %essid%%{A}"
+label-connected-background = ${colors.tela}
 label-connected-foreground = ${colors.background}
 label-connected-padding = 1
 
-label-disconnected = "%{A1:nm-connection-editor:}%{A}"
-label-disconnected-background = ${colors.pink}
-label-disconnected-foreground = #666
+label-disconnected = "%{A1:nm-connection-editor:}睊%{A}"
+label-disconnected-background = ${colors.tela}
+label-disconnected-foreground = ${colors.background}
 label-disconnected-padding = 1
 
 ;===============================================================================

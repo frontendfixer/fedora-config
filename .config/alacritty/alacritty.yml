@@ -1,3 +1,4 @@
+#
 #     ██╗      █████╗ ██╗  ██╗███████╗██╗  ██╗███╗   ███╗██╗██╗  ██╗ █████╗ ███╗   ██╗████████╗ █████╗
 #     ██║     ██╔══██╗██║ ██╔╝██╔════╝██║  ██║████╗ ████║██║██║ ██╔╝██╔══██╗████╗  ██║╚══██╔══╝██╔══██╗
 #     ██║     ███████║█████╔╝ ███████╗███████║██╔████╔██║██║█████╔╝ ███████║██╔██╗ ██║   ██║   ███████║
@@ -18,8 +19,8 @@ env:
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color
-  LANG: "en_US.UTF-8"
-  LC_CTYPE: en_US.UTF-8
+  LANG: "en_IN.UTF-8"
+  LC_CTYPE: en_IN.UTF-8
 window:
   # Window dimensions (changes require restart)
   #
@@ -53,7 +54,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: none
+  decorations: full
   # Startup Mode (changes require restart)
   #
   # Values for `startup_mode`:
@@ -63,7 +64,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Maximized
+  startup_mode: Windowed
   # Window title
   title: Alacritty
   # Window class (Linux/BSD only):
@@ -87,78 +88,14 @@ scrolling:
 
 # Font configuration
 font:
-  # Normal (roman) font face
+  size: 11.0
   normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
-    family: "Source Code Pro"
-    # family: CodeNewRoman Nerd Font
-    # family: RobotoMono Nerd Font
-    # family: Hack
-    # family: JetBrains Mono
-    # family: UbuntuMono Nerd Font
-    # family: Mononoki Nerd Font
-
-    # The `style` can be specified to pick a specific face.
+    family: Hack Nerd Font 
     style: Regular
-
-    # Bold font face
   bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
-    # Italic font face
-    #italic:
-    family: Source Code Pro
-    # family: CodeNewRoman Nerd Font
-    # family: RobotoMono Nerd Font
-    # family: Hack
-    # family: UbuntuMono Nerd Font
-    # family: Mononoki Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    style: Bold
-
-  # Italic font face
+    family: Hack Nerd Font
   italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    family: Source Code Pro
-    # family: CodeNewRoman Nerd Font
-    # family: RobotoMono Nerd Font
-    # family: Hack
-    # family: UbuntuMono Nerd Font
-    # family: Mononoki Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    style: Italic
-
-  # Bold italic font face
-  bold_italic:
-    # Font family
-    #
-    # If the bold italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    family: Source Code Pro
-    # family: CodeNewRoman Nerd Font
-    # family: RobotoMono Nerd Font
-    # family: Hack
-    # family: UbuntuMono Nerd Font
-    # family: Mononoki Nerd Font
-
-    # The `style` can be specified to pick a specific face.
-    style: Bold Italic
-
+    family: Hack Nerd Font
   # Point size
   size: 11.0
 
@@ -548,29 +485,31 @@ schemes:
   RoyalDark: &RoyalDark
    # Default colors
    primary:
-     background: '#212128'
+     background: '#1a1a1e'
      foreground: '#eeeef4'
 
    # Normal colors
    normal:
-     black:   '#1a1a1e'
+     black:   '#212128'
      red:     '#f24054'
      green:   '#40f260'
-     yellow:  '#f2f260'
-     blue:    '#8060f2'
+     yellow:  '#f2f230'
+     blue:    '#7755f2'
      magenta: '#f240f2'
-     cyan:    '#00bcd4'
+     cyan:    '#00e5ff'
+     tela:    '#30f0b2'
      white:   '#d0d0d0'
 
    #  Bright colors
    bright:
-     black:   '#404040'
-     red:     '#f28080'
+     black:   '#56566c'
+     red:     '#f26c7b'
      green:   '#80f280'
      yellow:  '#f2f280'
-     blue:    '#a480f2'
-     magenta: '#f280c4'
-     cyan:    '#00e5ff'
+     blue:    '#9282f2'
+     magenta: '#f284f2'
+     cyan:    '#80f2ff'
+     tela:    '#60f0b2'
      white:   '#eeeeee'
 
 ######################################################################
@@ -587,7 +526,7 @@ schemes:
 # *SolarizedLight
 # *SolarizedDark
 # *TomorrowNight
-#*RoyalDark
+# *RoyalDark
 
 colors: *RoyalDark
 

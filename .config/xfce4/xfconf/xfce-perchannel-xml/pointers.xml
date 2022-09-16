@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="pointers" version="1.0">
+  <property name="Dell_KB216_Wired_Keyboard_Consumer_Control" type="empty">
+    <property name="RightHanded" type="bool" value="true"/>
+    <property name="Threshold" type="int" value="10"/>
+    <property name="Acceleration" type="double" value="10.000000"/>
+  </property>
+</channel>

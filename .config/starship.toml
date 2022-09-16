@@ -5,9 +5,10 @@
 #     ███████╗██║  ██║██║  ██╗███████║██║  ██║██║ ╚═╝ ██║██║██║  ██╗██║  ██║██║ ╚████║   ██║   ██║  ██║
 #     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝
 
+## to get all emoji install "noto-fonts-emoji" or "yay -S noto-fonts-emoji"
 
 # Don't print a new line at the start of the prompt
-add_newline = false
+add_newline = true
 
 # Make prompt a single line instead of two lines
 [line_break]
@@ -15,8 +16,8 @@ disabled = false
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]                         # The name of the module we are configuring is "character"
-success_symbol = "[  ->](bold #40f260)"  # The "success_symbol" is set to "➜" with color "bold green"
-error_symbol = "[  ->](bold #f24054)"      # used if previous command failed
+success_symbol = "[  ➜](bold #40f260)"  # The "success_symbol" is set to "➜" with color "bold green"
+error_symbol = "[  ➜](bold #f24054)"      # used if previous command failed
 
 ########### Dracula Color  ################
 [aws]
@@ -31,8 +32,10 @@ style = "bold #f240f2"
 commit_hash_length = 8
 style = "bold #F2F280"
 
+
 [git_state]
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
+style = "bold #f24054"
 
 [git_status]
 conflicted = "⚔️ "
@@ -55,26 +58,28 @@ format = "$all_status$ahead_behind"
 #[│](bold green)$directory$rust$package
 #[└─::](bold green) """
 
-# ~/.config/starship.toml
-
-#[shell]
-#fish_indicator = ""
-#powershell_indicator = "_"
-#unknown_indicator = "mystery shell"
-#format = "[$indicator]($style) "
-#style = "cyan bold"
-#disabled = false
 
 
 # Indicates when in bash shell.
-#[custom.bash]
-#command = "echo 🚀"
-#when = '[ "$STARSHIP_SHELL" == "bash" ]'
+[custom.bash]
+command = "echo 🅱🅰🆂🅷"
+when = '[ "$STARSHIP_SHELL" == "bash" ]'
 
 # Indicates when in fish shell.
-#[custom.fish]
-#command = "echo "
-#when = 'test "$STARSHIP_SHELL" = "fish"'
+[custom.fish]
+command = "echo : 🅵🅸🆂🅷"
+when = 'test "$STARSHIP_SHELL" = "fish"'
+
+# Indicates when in zsh shell.
+[custom.zsh]
+command = "echo : 🆉🆂🅷"
+when = 'test "$STARSHIP_SHELL" = "zsh"'
+
+# Indicates when in Nushell.
+[custom.nu]
+command = "echo 🦀"
+shell = 'bash'
+when = '[ "$STARSHIP_SHELL" == "" ]' # not set in Nushell
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -82,22 +87,22 @@ disabled = true
 
 [hostname]
 ssh_only = false
-format = "[$hostname]($style):: "
+format = "[ $hostname]($style)[](bg:#40f260 fg:#f24054)"
 trim_at = "-"
-style = "bold #00e5ff"
-disabled = false
+style = "bold bg:#f24054 fg:#212128"
+disabled = true
 
 [memory_usage]
 format = "$symbol[${ram}( | ${swap})]($style) "
 threshold = 70
 style = "bold dimmed white"
-disabled = true
+disabled = false
 
 [time]
 time_format = "%l:%M%P"
-format = "$time($style) "
+format = "$time($style)"
 use_12hr = true
-style = "bright-white"
+style = "bold bg:#f24054 fg:#666"
 disabled = true
 
 [cmd_duration]
@@ -107,14 +112,16 @@ style = "bold #f2f260"
 
 [directory]
 truncation_length = 3
-format = "[$path]($style)[$lock_symbol]($lock_style) "
-style = "bold #40f260"
-
-# ~/.config/starship.toml
+truncation_symbol = "…/"
+format = "[ $path]($style)[ $read_only]($read_only_style)[ ](#40f260)"
+style = "bg:#40f260 fg:#212128"
+read_only = "🔒"
+read_only_style = "bg:#40f260 fg:#1a1a1e"
 
 [username]
-style_root = "bold #f240f2"
-format = "[$user]($style) on "
-style_user = "bold #f280c4"
-disabled = true
+style_root = "bold bg:#f240f2 fg:212128"
+format = "[ $user]($style)[](bg:#40f260 fg:#f24054)"
+#format = "[$user]($style) on "
+style_user = "bold bg:#f24054 fg:#212128"
+disabled = false
 show_always = true

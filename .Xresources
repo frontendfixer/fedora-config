@@ -1,50 +1,63 @@
-#
-#     ██╗      █████╗ ██╗  ██╗███████╗██╗  ██╗███╗   ███╗██╗██╗  ██╗ █████╗ ███╗   ██╗████████╗ █████╗
-#     ██║     ██╔══██╗██║ ██╔╝██╔════╝██║  ██║████╗ ████║██║██║ ██╔╝██╔══██╗████╗  ██║╚══██╔══╝██╔══██╗
-#     ██║     ███████║█████╔╝ ███████╗███████║██╔████╔██║██║█████╔╝ ███████║██╔██╗ ██║   ██║   ███████║
-#     ██║     ██╔══██║██╔═██╗ ╚════██║██╔══██║██║╚██╔╝██║██║██╔═██╗ ██╔══██║██║╚██╗██║   ██║   ██╔══██║
-#     ███████╗██║  ██║██║  ██╗███████║██║  ██║██║ ╚═╝ ██║██║██║  ██╗██║  ██║██║ ╚████║   ██║   ██║  ██║
-#     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝
+!
+!     ██╗      █████╗ ██╗  ██╗███████╗██╗  ██╗███╗   ███╗██╗██╗  ██╗ █████╗ ███╗   ██╗████████╗ █████╗
+!     ██║     ██╔══██╗██║ ██╔╝██╔════╝██║  ██║████╗ ████║██║██║ ██╔╝██╔══██╗████╗  ██║╚══██╔══╝██╔══██╗
+!     ██║     ███████║█████╔╝ ███████╗███████║██╔████╔██║██║█████╔╝ ███████║██╔██╗ ██║   ██║   ███████║
+!     ██║     ██╔══██║██╔═██╗ ╚════██║██╔══██║██║╚██╔╝██║██║██╔═██╗ ██╔══██║██║╚██╗██║   ██║   ██╔══██║
+!     ███████╗██║  ██║██║  ██╗███████║██║  ██║██║ ╚═╝ ██║██║██║  ██╗██║  ██║██║ ╚████║   ██║   ██║  ██║
+!     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝
 
+
+
+!URxvt------------------------
+!URxvt.font: xtf:Source Code Pro:Regular:size=11
+URxvt.font: xft:Source Code Pro:size=11, xtf:Noto Color Emoji:size=12
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 24
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
 
 ! special
 *.foreground:   #eeeef4
-*.background:   #212128
+*.background:   #1a1a1e
 *.cursorColor:  #eeeef4
 
 ! black
-*.color0:       #1a1a1e
-*.color8:       #404040
+*.color0:       #212128
+*.color8:       #56566c
 
 ! red
 *.color1:       #f24054
-*.color9:       #f28080
+*.color9:       #f26c7b
 
 ! green
 *.color2:       #40f260
 *.color10:      #80f280
 
 ! yellow
-*.color3:       #f2f260
+*.color3:       #f2f230
 *.color11:      #f2f280
 
 ! blue
-*.color4:       #8060f2
-*.color12:      #a480f2
+*.color4:       #7755f2
+*.color12:      #9282f2
 
 ! magenta
-*.color5:       #f240f2
-*.color13:      #f280c4
+*.color5:       #f242f2
+*.color13:      #f284f2
 
 ! cyan
-*.color6:       #00bcd4
-*.color14:      #00e5ff
+*.color6:       #00e5ff
+*.color14:      #80f2ff
 
 ! white
-*.color7:       #d0d0d0
-*.color15:      #ececec
-
-*background:  #212128
-*cursorColor:  #d0d0d0
-*foreground:  #eeeef4
+*.color7:       #30f0b2
+*.color15:      #60f0b2
 

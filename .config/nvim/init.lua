@@ -1,9 +1,9 @@
 require "user.options"
 require "user.keymaps"
 require "user.plugins"
+require "user.autocommands"
 require "user.colorscheme"
 require "user.cmp"
-require "user.lsp"
 require "user.telescope"
 --require "user.treesitter"
 require "user.autopairs"
@@ -15,18 +15,21 @@ require "user.lualine"
 require "user.toggleterm"
 require "user.project"
 require "user.impatient"
+require "user.illuminate"
 require "user.indentline"
 require "user.alpha"
-require "user.whichkey"
-require "user.autocommands"
-require'nvim-web-devicons'.get_icons()
---require('monokai').setup {}
---require('monokai').setup { palette = require('monokai').pro }
---require('monokai').setup { palette = require('monokai').soda }
---require('monokai').setup { palette = require('monokai').ristretto }
+require "user.lsp"
+require "user.dap"
 vim.cmd[[colorscheme dracula]]
---vim.cmd[[colorscheme tokyonight]]
--- Attaches to every FileType mode
+
+require('scrollview').setup({
+  excluded_filetypes = {'nerdtree'},
+  current_only = true,
+  winblend = 75,
+  --base = 'buffer',
+  --column = 80
+})
+
 require 'colorizer'.setup()
 
 -- Attach to certain Filetypes, add special configuration for `html`
@@ -62,66 +65,4 @@ require 'colorizer'.setup {
   '*'; -- Highlight all files, but customize some others.
   '!vim'; -- Exclude vim from highlighting.
   -- Exclusion Only makes sense if '*' is specified!
-}
-
--- following options are the default
--- each of these are documented in `:help nvim-tree.OPTION_NAME`
-require'nvim-tree'.setup {
-  disable_netrw       = true,
-  hijack_netrw        = true,
-  open_on_setup       = false,
-  ignore_ft_on_setup  = {},
-  auto_close          = false,
-  open_on_tab         = false,
-  hijack_cursor       = false,
-  update_cwd          = false,
-  update_to_buf_dir   = {
-    enable = true,
-    auto_open = true,
-  },
-  diagnostics = {
-    enable = false,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    }
-  },
-  update_focused_file = {
-    enable      = false,
-    update_cwd  = false,
-    ignore_list = {}
-  },
-  system_open = {
-    cmd  = nil,
-    args = {}
-  },
-  filters = {
-    dotfiles = false,
-    custom = {}
-  },
-  git = {
-    enable = true,
-    ignore = true,
-    timeout = 500,
-  },
-  view = {
-    width = 30,
-    height = 30,
-    hide_root_folder = false,
-    side = 'left',
-    auto_resize = false,
-    mappings = {
-      custom_only = false,
-      list = {}
-    },
-    number = false,
-    relativenumber = false,
-    signcolumn = "yes"
-  },
-  trash = {
-    cmd = "trash",
-    require_confirm = true
-  }
 }

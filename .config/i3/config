@@ -28,7 +28,7 @@
 ################################################################################
 
 # Font for window titles.
-font pango:Source Code Pro 11
+font pango:Hack Nerd Font 11
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -37,8 +37,9 @@ set $mod Mod4
 set $terminal alacritty
 set $browser firefox
 set $file thunar
-set $editor Code
-set $note Notepadqq
+set $editor code
+set $note Mousepad
+set $photoViewer Ristretto
 
 ################# Define the movements keys - variables
 set $up Up
@@ -49,42 +50,52 @@ set $right Right
 #####################
 # workspace layout: #
 #####################
-
-# default i3 tiling mode:
 workspace_layout default
-
-# i3 stacking layout:
-# Each window will be fullscreen and tabbed top to bottom.
-#workspace_layout stacking
-
-# i3 tabbed layout:
-# Each new window will open fullscreen as a tab (left to right)
-#workspace_layout tabbed
-
-##############################
-# extra options for windows: #
-##############################
-
-#border indicator on windows:
 new_window pixel 1
-
-# thin borders
-# hide_edge_borders both
-
-################# i3 gaps next                     
-# Settings for I3 next gap git
-# https://github.com/Airblader/i3/tree/gaps-next
-# delete or uncomment the following lines if you do not have it or do not
-# want it
-
 for_window [class="^.*"] border pixel 2
+gaps inner 2
+gaps outer 2
+
+################# i3 gaps change                   
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
 ################# Popups  control                  
-# Popups during fullscreen mode
 popup_during_fullscreen smart
-
-# show window title bars (not officially supported with i3gaps)
-#default_border normal
 
 # window title alignment
 title_align center
@@ -169,43 +180,28 @@ for_window [urgent=latest] focus
 
 
 ################## compositor 
-# picom: https://wiki.archlinux.org/title/Picom
-# manpage: https://man.archlinux.org/man/picom.1.en
 exec_always picom -b --config ~/.config/picom/picom.conf
 
 
 ################## autostart applications/services on login
 
 exec --no-startup-id dex --autostart --environment i3
-#get auth work with polkit-gnome
-exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
-### num lock activated
+exec --no-startup-id /usr/libexec/xfce-polkit
 exec --no-startup-id numlockx on
-### start conky:
-#exec_always --no-startup-id conky
-### polybar Start Script
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-### set wallpaper
-#exec --no-startup-id sleep 2 && nitrogen --restore
 exec --no-startup-id feh --bg-fill --randomize ~/.background/* &
-
-### Desktop notifications
-# exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
-# alternative if you installed aside with XFCE4:
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
-### autotiling script
-# https://github.com/nwg-piotr/autotiling
-#yay -S autotiling ;) (it is in AUR)
-exec_always --no-startup-id autotiling
-### Power Manager
 exec --no-startup-id xfce4-power-manager &
 
-############ Autostart apps ############################ 
+### autotiling script
+#sudo dnf install python-i3ipc
+exec_always --no-startup-id ~/.config/i3/scripts/autotilling -w 1 3 5 7 9
 
-# exec --no-startup-id sleep 1 && $terminal
-# exec --no-startup-id sleep 2 && $browser
-# exec --no-startup-id sleep 1 && $file
-# exec --no-startup-id sleep 1 && $editor
+############ Autostart apps 
+#exec --no-startup-id sleep 1 && $terminal
+#exec --no-startup-id sleep 2 && $browser
+exec --no-startup-id sleep 1 && $file
+#exec --no-startup-id sleep 1 && $editor
 
 ####################   resize    #########################
 
@@ -242,18 +238,19 @@ bindsym $mod+r mode "resize"
 
 # start a terminal
 bindsym $mod+Return exec $terminal
+bindsym $mod+c exec $editor
 
 # kill focused window
 bindsym $mod+q kill
 bindsym $mod+Shift+q kill
 
 # reload & restart the configuration file
-bindsym $mod+Shift+c reload
+#bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 ################# menu's in archlinux
 # start dmenu
-bindsym $mod+d exec dmenu_run -h 24 -nb '#1a1e1e' -sf '#212128' -sb '#f24054' -nf '#00e5ff' -fn "Source Code Pro 10" 
+bindsym $mod+d exec dmenu_run -nb '#1a1e1e' -sf '#212128' -sb '#f24054' -nf '#00e5ff' -fn "Hack Nerd Font 12"
 # rofi bindings
 bindsym $mod+p exec rofi -modi drun -show drun -config ~/.config/rofi/col_singlerow.rasi
 bindsym $mod+t exec rofi -modi window -show window -config ~/.config/rofi/rofidmenu.rasi
@@ -265,12 +262,10 @@ bindsym $mod+Shift+e exec ~/.config/polybar/scripts/powermenu
 
 ### Lock the system
 # lock with a picture:
-bindsym $mod+Shift+l exec ~/.config/i3/scripts/lock.sh
+bindsym $mod+l exec ~/.config/i3/scripts/fun-lock
 # lock by blurring the screen:
-#bindsym $mod+Shift+l exec ~/.config/i3/scripts/blur-lock
-#with betterlockscreen
-#bindsym $mod+Shift+l exec betterlockscreen --off 120 --lock dimblur
-# Alternative (set last used background)
+#bindsym $mod+l exec ~/.config/i3/scripts/blur-lock
+
 exec --no-startup-id source ~/.fehbg
 ### open new empty workspace
 bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace
@@ -313,21 +308,17 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus parent
 # focus the child container
-bindsym $mod+c focus child
+bindsym $mod+Shift+c focus child
 
 ######################## Multimedia Keys
 
 # volume
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
-### Pulse Audio controls
-#bindsym XF86AudioRaiseVolume exec pamixer -i 5 && dunstify -h string:x-dunst-stack-tag:volume volume: $(pamixer --get-volume)%
-#bindsym XF86AudioLowerVolume exec pamixer -d 5 && dunstify -h string:x-dunst-stack-tag:volume volume: $(pamixer --get-volume)%
-#bindsym XF86AudioMute exec pamixer -t && dunstify -h string:x-dunst-stack-tag:mute mute: $(pamixer --get-mute)!
 
 ### play/pause keys
 bindsym XF86AudioPlay exec playerctl play
@@ -343,9 +334,10 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 bindsym $mod+b exec $browser;focus
 bindsym $mod+e exec $file;focus
 bindsym $mod+n exec $note
-bindsym $mod+Control+e exec $editor;focus
 bindsym Insert exec "scrot ~/Pictures/%Y-%m-%d-%T-scr.png"
 
+# Power Profiles menu switcher (rofi)
+bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
 
 ##########################################
 # configuration for workspace behaviour: #
@@ -375,20 +367,21 @@ set $ws10 "10"
 
 ### assign applications to workspaces
 assign [class="Alacritty|kitty"] $ws1
-assign [class="firefox|Google-chrome|Chromium-browser"] $ws2
+assign [class="firefox|Google-chrome"] $ws2
 assign [class="Thunar|Pcmanfm"] $ws3
-assign [class="Code|Subl1|VSCodium|Geany|Atom"] $ws4
-assign [class="Gimp"] $ws8
-assign [class="kdenlive"] $ws7
+assign [class="code-oss|Code|Subl|VSCodium|Geany|Atom"] $ws4
+assign [class="Gimp|kdenlive"] $ws8
 assign [class="vlc|libreoffice"] $ws6
+assign [class="Parole"] $ws9
 
 # automatic set focus new window if it opens on another workspace then the current:
 for_window [class=Alacritty] focus
 for_window [class=firefox] focus
-for_window [class=Chromium-browser] focus
+for_window [class=Chromium] focus
 for_window [class=Thunar] focus
 for_window [class=Pcmanfm] focus
 for_window [class=Geany] focus
+for_window [class=code-oss] focus
 for_window [class=Code] focus
 for_window [class=Subl] focus
 for_window [class=VSCodium] focus
@@ -404,10 +397,6 @@ exec --no-startup-id blueberry-tray
 exec --no-startup-id nm-applet
 # clipman-applet
 exec --no-startup-id xfce4-clipman
-# Updater
-exec --no-startup-id pamac-tray
-# dropbox
-exec --no-startup-id dropbox start
 # volume
 exec --no-startup-id volumeicon
 
@@ -415,6 +404,9 @@ exec --no-startup-id volumeicon
 ########   floating rules    #######
 ####################################
 
+for_window [floating_from="user"] border pixel 2 red 
+
+for_window [class="Ristretto"] floating enable resize set 1024 640 
 for_window [class="__main__.py"] floating enable resize set 800 640 border normal
 for_window [class="Blueberry.py"] floating enable
 for_window [class="Galculator"] floating enable border pixel 1
@@ -423,9 +415,8 @@ for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Xarchiver"] floating enable
-for_window [class="octopi"] floating enable
-for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="easyeffects"] floating enable
 for_window [class="Rhythmbox"] floating enable
 for_window [class="Lollypop"] floating enable  
 for_window [class="qt5ct"] floating enable sticky enable border normal
@@ -444,7 +435,9 @@ for_window [class="whatsapp-nativefier-d40211"] floating enable
 for_window [class="xdman-Main"] floating enable
 for_window [class="Notepadqq"] floating enable
 for_window [class="Mousepad"] floating enable
-for_window [class="Chromium"] floating enable
+for_window [class="Gedit"] floating enable resize set 960 640
+for_window [class="Font-manager"] floating enable
+for_window [class="Parole"] floating enable
 
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [title="alsamixer"] floating enable border pixel 1
